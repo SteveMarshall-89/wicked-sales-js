@@ -33,6 +33,24 @@ app.get('/api/products', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/products/:productId', (req, res, next) => {
+  const value = [req.params.productId];
+  const text = `
+  SELECT    *
+  FROM      "products"
+  WHERE     "productId" = $1
+  `;
+  db.query(text, value)
+    .then(result => {
+      if (result.rows[0]) {
+        return res.json(result.rows[0]);
+      } else {
+        next(new ClientError('The product you are looking for could not be found or has moved. Whoops!', 404));
+      }
+    })
+    .catch(err => next(err));
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
