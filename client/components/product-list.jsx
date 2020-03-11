@@ -29,7 +29,11 @@ class ProductList extends React.Component {
         shortDesc={product.shortDescription}/>;
     });
     return (
-      { productGrid }
+      <div className="container">
+        <div className="row justify-content-center">
+          {productGrid}
+        </div>
+      </div>
     );
   }
 }
