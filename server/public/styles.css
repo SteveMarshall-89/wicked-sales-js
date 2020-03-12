@@ -1,10 +1,11 @@
-i {
+.fa-poo-storm {
   color: antiquewhite ;
 }
 
 img {
   height: 25vh;
   object-fit: scale-down;
+  cursor: pointer;
 }
 
 header {
@@ -13,4 +14,8 @@ header {
 
 .card {
   box-shadow: 1px 1px 2px rgba(128, 128, 128, 0.2);
+}
+
+a {
+  cursor: pointer
 }

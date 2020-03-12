@@ -7,6 +7,7 @@ class ProductList extends React.Component {
     this.state = {
       products: []
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -19,6 +20,10 @@ class ProductList extends React.Component {
       .then(products => this.setState({ products }));
   }
 
+  handleClick() {
+    this.props.view('details', { productId: this.state.products.productId });
+  }
+
   render() {
     const productGrid = this.state.products.map(product => {
       return <ProductListItem
@@ -26,7 +31,9 @@ class ProductList extends React.Component {
         name={product.name}
         price={product.price}
         image={product.image}
-        shortDesc={product.shortDescription}/>;
+        shortDesc={product.shortDescription}
+        click={this.props.view}
+        id={product.productId}/>;
     });
     return (
       <div className="container">
