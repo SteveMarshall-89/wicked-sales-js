@@ -68,7 +68,8 @@ app.get('/api/cart', (req, res, next) => {
      WHERE "c"."cartId" = $1;
      `;
     db.query(text, value)
-      .then(result => res.json(result.rows[0]));
+      .then(result => res.json(result.rows[0]))
+      .catch(err => next(err));
   }
 });
 
@@ -87,7 +88,7 @@ app.post('/api/cart', (req, res, next) => {
     .then(priceResult => {
       const price = priceResult.rows[0];
       if (!priceResult.rows[0]) {
-        next(new ClientError('Product not found', 400));
+        throw new ClientError('Product not found', 400);
       } else {
         if (req.session.cartId) {
           const cartObj = { cartId: req.session.cartId, ...price };
@@ -133,7 +134,7 @@ app.post('/api/cart', (req, res, next) => {
       return db.query(text, value)
         .then(result => res.status(201).json(result.rows[0]));
     })
-    .catch();
+    .catch(err => next(err));
 });
 
 app.use('/api', (req, res, next) => {
