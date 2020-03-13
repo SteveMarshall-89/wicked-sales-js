@@ -9,7 +9,7 @@ function Header(props) {
           <a className="navbar-brand" href="#">
             <h1>{props.storeName}</h1>
           </a>
-          <a className="cart text-white">
+          <a className="cart text-white" onClick={() => props.view('cart', {})}>
             <i className="fas fa-shopping-cart"></i> {props.cartItemCount} Items
           </a>
         </nav>
