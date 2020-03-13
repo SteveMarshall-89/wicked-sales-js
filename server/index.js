@@ -68,7 +68,7 @@ app.get('/api/cart', (req, res, next) => {
      WHERE "c"."cartId" = $1;
      `;
     db.query(text, value)
-      .then(result => res.json(result.rows[0]))
+      .then(result => res.json(result.rows))
       .catch(err => next(err));
   }
 });
