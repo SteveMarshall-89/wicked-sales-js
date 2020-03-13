@@ -9,7 +9,9 @@ function Header(props) {
           <a className="navbar-brand" href="#">
             <h1>{props.storeName}</h1>
           </a>
-          <i className="fas fa-poo-storm fa-5x"></i>
+          <a className="cart text-white">
+            <i className="fas fa-shopping-cart"></i> {props.cartItemCount} Items
+          </a>
         </nav>
       </div>
     </header>
