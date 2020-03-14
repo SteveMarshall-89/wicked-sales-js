@@ -137,6 +137,27 @@ app.post('/api/cart', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/orders', (req, res, next) => {
+  if (!req.session.cartId) {
+    throw new ClientError('No Order Found.', 400);
+  }
+  if (!req.body.name || !req.body.creditCard || !req.body.shippingAddress) {
+    throw new ClientError('Missing information from order details.', 400);
+  }
+  const values = [req.session.cartId, req.body.name, req.body.creditCard, req.body.shippingAddress];
+  const text = `
+          INSERT INTO "orders" ("cartId", "name", "creditCard", "shippingAddress")
+          VALUES              ($1, $2, $3, $4)
+          RETURNING           *;
+          `;
+  db.query(text, values)
+    .then(result => {
+      delete req.session.cartId;
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
