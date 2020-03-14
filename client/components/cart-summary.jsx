@@ -43,10 +43,11 @@ function CartSummary(props) {
       <div>
         {cartListArray}
       </div>
-      <div className="cart-footer mb-4">
-        <h1 className="text-right mr-3">Subtotal: ${(subtotal / 100).toFixed(2)}</h1>
-        <h3 className="text-right mr-3">Estimated Tax: ${((subtotal / 100) * 0.08).toFixed(2)}</h3>
-        <h3 className="text-right mr-3">Shipping: FREE</h3>
+      <div className="cart-footer mb-4 text-right">
+        <h1 className="mr-3">Subtotal: ${(subtotal / 100).toFixed(2)}</h1>
+        <h3 className="mr-3">Estimated Tax: ${((subtotal / 100) * 0.08).toFixed(2)}</h3>
+        <h3 className="mr-3 mb-2">Shipping: FREE</h3>
+        <button className="checkout mr-3 mt-3 btn btn-info btn-lg" onClick={() => props.view('checkout', {})}>Checkout</button>
       </div>
     </div>
   );
