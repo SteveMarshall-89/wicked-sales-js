@@ -7,7 +7,7 @@ function Header(props) {
         <nav className="navbar sticky-top navbar-dark bg-dark">
           <i className="fas fa-poo-storm fa-5x"></i>
           <a className="navbar-brand" href="#">
-            <h1>{props.storeName}</h1>
+            <h1 className="font-italic">{props.storeName}</h1>
           </a>
           <a className="cart text-white" onClick={() => props.view('cart', {})}>
             <i className="fas fa-shopping-cart"></i> {props.cartItemCount} Items
